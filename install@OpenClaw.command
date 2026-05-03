@@ -93,10 +93,12 @@ install_homebrew() {
       exit 1
     }
   else
-    echo "👉 回车升级 brew，输入任意字符跳过"
+    echo "👉 回车跳过升级 Homebrew，输入任意字符则升级"
     read -r c
-    if [[ -z "$c" ]]; then
+    if [[ -n "$c" ]]; then
       brew update && brew upgrade && brew cleanup
+    else
+      gray_echo "已跳过 Homebrew 升级"
     fi
   fi
 }
