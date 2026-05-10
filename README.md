@@ -21,9 +21,29 @@
 
 ## 一、脚本作用 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-* 这是一个面向 **macOS** 的 [**OpenClaw**](https://github.com/openclaw/openclaw) 一键安装脚本，目标是把本地仓库校验、依赖准备、项目构建、**CLI** 安装、**PATH** 修复和 **Dashboard** 启动串成一条完整安装链路。
+这是一个面向 **macOS** 的 [**OpenClaw**](https://github.com/openclaw/openclaw) 一键安装脚本，目标是把本地仓库校验、依赖准备、项目构建、**CLI** 安装、**PATH** 修复和 **Dashboard** 启动串成一条完整安装链路
 
-## 二、核心流程 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+## 二、流程图 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+```mermaid
+graph TD
+    A([开始]) --> B[打印Logo并检查基础工具]
+    B --> C{用户按回车开始安装?}
+    C --> |是| D[校验OpenClaw仓库]
+    C --> |否| B
+    D --> E{仓库路径有效且为官方仓库?}
+    E --> |是| F[检查并安装Homebrew]
+    E --> |否| D
+    F --> G[安装Node.js和pnpm]
+    G --> H[构建OpenClaw项目]
+    H --> I{构建和Daemon安装成功?}
+    I --> |是| J[安装OpenClaw CLI并修复PATH]
+    I --> |否| K([结束])
+    J --> L[启动Dashboard并显示总结]
+    L --> M([结束])
+```
+
+## 三、核心流程 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ### 1. 启动引导
 
