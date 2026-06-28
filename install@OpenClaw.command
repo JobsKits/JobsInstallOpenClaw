@@ -41,19 +41,16 @@ print_logo() {
 pause_for_enter() {
   read -r "?按回车开始安装..." _
 }
-# 展示同目录 README，并等待用户确认后执行。
-show_readme_and_wait() {
+# 展示脚本内置自述，并等待用户确认后执行。
+show_script_intro_and_wait() {
   print -r -- '============================== 脚本内置自述 =============================='
   print -r -- '脚本名称：install@OpenClaw.command'
   print -r -- '核心用途：执行“install@OpenClaw”对应的自动化任务。'
   print -r -- '影响范围：可能修改当前项目、用户环境或脚本指定的目标。'
   print -r -- '取消方式：确认前按 Ctrl+C 终止，不会继续执行后续业务。'
   print -r -- '============================================================================'
-  local readme_path="${SCRIPT_DIR}/README.md"
-  [[ -f "$readme_path" ]] || { error_echo "未找到配套 README.md：$readme_path"; return 1; }
-  cat "$readme_path" | tee -a "$LOG_FILE"
   echo ""
-  read -r "?👉 已阅读 README，按回车继续；按 Ctrl+C 取消：" _
+  read -r "?👉 已了解脚本用途与影响，按回车继续；按 Ctrl+C 取消：" _
 }
 # 输出 show step 对应的说明与结果。
 show_step() {
@@ -203,7 +200,7 @@ initialize_script_runtime() {
 # 编排脚本的高层业务流程。
 main() {
   # 展示配套 README，确认安装影响范围后继续。
-  show_readme_and_wait
+  show_script_intro_and_wait
   # 初始化 Shell 选项、日志、依赖和入口运行状态。
   initialize_script_runtime
   # 清空旧日志，确保本次安装记录独立可查。
