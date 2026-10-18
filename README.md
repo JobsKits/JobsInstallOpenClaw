@@ -2,11 +2,33 @@
 
 ![Jobs出品，必属精品](https://picsum.photos/1500/400)
 
-[toc]
+<!-- jobs-toc:start -->
+<!-- jobs-toc:source {"v":2,"token":"[toc]"} -->
+<details>
+<summary>📚 目录（点击展开 / 收起）</summary>
+
+- [🔥 Features](#jobs-toc-heading-1)
+- [一、脚本作用 🔼](#jobs-toc-heading-2)
+- [二、流程图 🔼](#jobs-toc-heading-3)
+- [三、核心流程 🔼](#jobs-toc-heading-4)
+  - [1. 启动引导](#jobs-toc-heading-5)
+  - [2. 仓库路径校验](#jobs-toc-heading-6)
+  - [3、Homebrew 自检与处理](#jobs-toc-heading-7)
+  - [4. 依赖安装策略](#jobs-toc-heading-8)
+  - [5、官方构建流程](#jobs-toc-heading-9)
+  - [6. CLI 安装](#jobs-toc-heading-10)
+  - [7. PATH 自动修复](#jobs-toc-heading-11)
+  - [8. 启动 Dashboard](#jobs-toc-heading-12)
+- [四、实际目录结构](#repository-layout)
+- [五、安装入口流程](#repository-script-flows)
+  - [install@OpenClaw.command](#jobs-toc-heading-15)
+
+</details>
+<!-- jobs-toc:end -->
 
 [实际目录结构](#repository-layout) · [安装入口流程](#repository-script-flows)
 
-## 🔥 <font id=Features>Features</font> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+## <span id="jobs-toc-heading-1" data-jobs-toc="v2">🔥 <font id=Features>Features</font> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 交互式安装流程，支持彩色日志与步骤提示
 - 强校验本地  [**OpenClaw**](https://github.com/openclaw/openclaw) 仓库目录及 **Git** 远端
@@ -21,11 +43,11 @@
 - 关键步骤支持失败自动重试
 - 全流程输出日志，便于排障
 
-## 一、脚本作用 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a>
+## <span id="jobs-toc-heading-2" data-jobs-toc="v2">一、脚本作用 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a></span><!-- jobs-toc:heading-end -->
 
 这是一个面向 **macOS** 的 [**OpenClaw**](https://github.com/openclaw/openclaw) 一键安装脚本，目标是把本地仓库校验、依赖准备、项目构建、**CLI** 安装、**PATH** 修复和 **Dashboard** 启动串成一条完整安装链路
 
-## 二、流程图 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a>
+## <span id="jobs-toc-heading-3" data-jobs-toc="v2">二、流程图 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a></span><!-- jobs-toc:heading-end -->
 
 ```mermaid
 graph TD
@@ -45,34 +67,34 @@ graph TD
     L --> M([结束])
 ```
 
-## 三、核心流程 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a>
+## <span id="jobs-toc-heading-4" data-jobs-toc="v2">三、核心流程 <a href="#Features" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a></span><!-- jobs-toc:heading-end -->
 
-### 1. 启动引导 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-5" data-jobs-toc="v2">1. 启动引导 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 脚本启动后先显示安装说明
 - 等待用户按回车后再开始
 - 全程带彩色日志和步骤提示
 
-### 2. 仓库路径校验 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-6" data-jobs-toc="v2">2. 仓库路径校验 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 要求用户拖入本地 `openclaw` 仓库目录
 - 自动判断该目录是否为 **Git** 仓库
 - 自动检查 `origin` 是否指向官方仓库`https://github.com/openclaw/openclaw`
 - 路径错误时会循环提示，直到输入正确
 
-### 3、[**Homebrew**](https://brew.sh/) 自检与处理 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-7" data-jobs-toc="v2">3、[**Homebrew**](https://brew.sh/) 自检与处理 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 已有 Homebrew 时保留原有维护交互，不因目录只读而自动另装。
 - [**Homebrew**](https://brew.sh/) 安装路径由用户选择：已有可运行安装时复用；确实需要安装时先强提示，只有精确输入大写 `YES` 才选择系统标准目录，其它输入或直接回车选择当前用户的 `.local/homebrew`。`YES` 只表示选择路径，权限与密码由官方安装器实际处理；有管理员权限也可以选用户目录。选定路径失败立即停止，不自动切换；`Ctrl+C` / 输入结束取消整个任务。
 - 用户目录安装需要可用 Git 与 curl；后续系统级软件仍可能要求管理员权限。
 
-### 4. 依赖安装策略 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-8" data-jobs-toc="v2">4. 依赖安装策略 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 使用 `brew install node` 安装 **Node.js**，而不是单独安装 [**npm**](https://www.npmjs.com/)
 - 使用 `brew install pnpm` 安装 [**pnpm**](https://pnpm.io/)
 - 若 `node` 或 `pnpm` 已存在，则直接跳过，不重复升级。这样避免和前面的 `brew upgrade` 逻辑重复
 
-### 5、官方构建流程 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-9" data-jobs-toc="v2">5、官方构建流程 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 > 进入本地 [**OpenClaw**](https://github.com/openclaw/openclaw) 仓库后，依次执行：
 
@@ -85,18 +107,18 @@ pnpm openclaw onboard --install-daemon
 
 其中 `pnpm openclaw onboard --install-daemon` 会单独提示，因为它是最容易受系统权限影响的一步。
 
-### 6. CLI 安装 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-10" data-jobs-toc="v2">6. CLI 安装 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 使用 `npm install -g openclaw` 全局安装 [**OpenClaw**](https://github.com/openclaw/openclaw)  **CLI**
 
-### 7. PATH 自动修复 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-11" data-jobs-toc="v2">7. PATH 自动修复 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 安装完成后先检测 `openclaw` 命令是否可用
 - 如果已经可用，则不修改 **PATH**
 - 如果不可用，则自动将 [**npm**](https://www.npmjs.com/) 全局 **bin** 目录写入 shell 配置文件
 - 这是兜底方案，避免用户安装完成后仍然 `command not found`
 
-### 8. 启动 Dashboard <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### <span id="jobs-toc-heading-12" data-jobs-toc="v2">8. 启动 Dashboard <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 最后自动执行：`openclaw dashboard`
 
@@ -112,7 +134,7 @@ pnpm openclaw onboard --install-daemon
 
 ## 五、<span id="repository-script-flows">安装入口流程</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### [install@OpenClaw.command](./install@OpenClaw.command)
+### <span id="jobs-toc-heading-15" data-jobs-toc="v2">[install@OpenClaw.command](./install@OpenClaw.command)</span><!-- jobs-toc:heading-end -->
 
 > **目的：** 在本地已下载的 OpenClaw 官方源码上准备依赖、构建并打开 Dashboard。
 
