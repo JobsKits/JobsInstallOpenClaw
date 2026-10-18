@@ -4,6 +4,8 @@
 
 [toc]
 
+[实际目录结构](#repository-layout) · [安装入口流程](#repository-script-flows)
+
 ## 🔥 <font id=Features>Features</font> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 交互式安装流程，支持彩色日志与步骤提示
@@ -99,6 +101,28 @@ pnpm openclaw onboard --install-daemon
 - 最后自动执行：`openclaw dashboard`
 
 - 若启动失败，会给出手动执行提示
+
+## 四、<span id="repository-layout">实际目录结构</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+```text
+🦞JobsInstallOpenClaw/
+├── README.md / LICENSE / icon.png
+└── install@OpenClaw.command                # 在已有官方源码目录上安装构建
+```
+
+## 五、<span id="repository-script-flows">安装入口流程</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+### [install@OpenClaw.command](./install@OpenClaw.command)
+
+> **目的：** 在本地已下载的 OpenClaw 官方源码上准备依赖、构建并打开 Dashboard。
+
+* 阅读自述，输入或拖入已下载的 OpenClaw 仓库目录，校验 `.git` 目录和官方 origin 地址。
+* 检测 Homebrew、Node.js 和 pnpm，按提示安装或更新需要的依赖。
+  * 已有依赖可复用；本脚本不负责自动克隆 OpenClaw 源码。
+* 依次执行依赖安装、界面构建和主程序构建；关键步骤失败时按设定次数重试。
+* 运行 onboarding 并安装 daemon，再通过 npm 安装全局 OpenClaw 命令。
+* 检查命令路径并尝试打开 Dashboard，汇总结果。
+  * 命令不在 PATH 时补 npm 全局路径；Dashboard 启动失败时给出手动执行提示。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>
 
