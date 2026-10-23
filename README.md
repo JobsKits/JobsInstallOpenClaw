@@ -121,7 +121,6 @@ pnpm openclaw onboard --install-daemon
 ### <span id="jobs-toc-heading-12" data-jobs-toc="v2">8. 启动 Dashboard <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></span><!-- jobs-toc:heading-end -->
 
 - 最后自动执行：`openclaw dashboard`
-
 - 若启动失败，会给出手动执行提示
 
 ## 四、<span id="repository-layout">实际目录结构</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
@@ -147,4 +146,3 @@ pnpm openclaw onboard --install-daemon
   * 命令不在 PATH 时补 npm 全局路径；Dashboard 启动失败时给出手动执行提示。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>
-
